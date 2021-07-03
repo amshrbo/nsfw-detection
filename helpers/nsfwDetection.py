@@ -8,7 +8,7 @@ from helpers.preprocessImgs import prepare_img
 
 #Loading the model
 print("--------Loading the model---------")
-model = keras.models.load_model('./model/savedOver90')
+model = keras.models.load_model('./model')
 
 def nsfw_detection(img_path):
     """
