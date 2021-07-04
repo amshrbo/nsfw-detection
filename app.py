@@ -4,22 +4,28 @@ from PIL import Image
 import os, shutil
 from helpers.nsfwDetection import nsfw_detection
 from helpers.nudityDetection import nude_detection
+from helpers.nsfwCheck import nsfw_check
 
 savingFolder = './uploadedImgs'
 app = Flask(__name__)
 
 def get_preds(img_path):
     value = nude_detection(img_path)
-    unsafe_score = value[img_path]['unsafe']
-    
     nsfw_preds = nsfw_detection(img_path)
+
+    unsafe_score = value[img_path]['unsafe']
+    unsafe_score = int(unsafe_score * 100)    
+
+    isContainNudity = False
+    if unsafe_score > 85:
+        isContainNudity = True
+
     preds = {
-        'nude_score': int(unsafe_score * 100),
-        'drugs_score': int(nsfw_preds[0][0] * 100),
+        'nude_score': unsafe_score,
+        # 'drugs_score': int(nsfw_preds[0][0] * 100),
         'violence_score': int(nsfw_preds[0][1] * 100),
         'natural_score': int(nsfw_preds[0][2] * 100)
     }
-    # print(preds)
 
     return preds
 
@@ -51,8 +57,17 @@ def uploaded_imgs():
 
     print("___Deleting files____")
     delete_imgs()
-    
-    return jsonify(all_results)
+
+    boleans = nsfw_check(all_results)
+    print(boleans)
+
+    return jsonify(
+        data = all_results,
+        isContainNude = boleans['nude'], 
+        isContainViolence = boleans['violence']
+        # isContainDrugs = boleans['drugs']
+        )
+
 
 def delete_imgs():
     for imgname in os.listdir(savingFolder):
