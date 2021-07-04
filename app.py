@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify
+import werkzeug
 from PIL import Image
+import os
 from helpers.nsfwDetection import nsfw_detection
 from helpers.nudityDetection import nude_detection
 
+savingFolder = './uploadedImgs'
 app = Flask(__name__)
 
 def get_preds(img_path):
@@ -21,17 +24,25 @@ def get_preds(img_path):
     return preds
 
 
-@app.route('/img_path', methods=['POST'])
-def uploaded_imgs():
-    img_path = request.json['img_path']
-    print(img_path)
-    predictions = get_preds(img_path)
+@app.route('/', methods=['POST', 'GET'])
+def hello():
+    return 'Hello world'
 
+@app.route('/preds', methods=['POST', 'GET'])
+def uploaded_imgs():
+    imgfile = request.files['image']
+    img_name = werkzeug.utils.secure_filename(imgfile.filename)
+    print(f'Recived an img with file name: {img_name}')
+
+    img_path = os.path.join(savingFolder, img_name)
+    imgfile.save(img_path)
+
+
+    predictions = get_preds(img_path)
     print(predictions)
     print(type(predictions))
     result = [
         {'img_path': img_path, 'preds':predictions},
-        {'img_path': img_path, 'preds':predictions} 
     ]
 
     return jsonify(result)
