@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import werkzeug
 from PIL import Image
-import os
+import os, shutil
 from helpers.nsfwDetection import nsfw_detection
 from helpers.nudityDetection import nude_detection
 
@@ -30,22 +30,35 @@ def hello():
 
 @app.route('/preds', methods=['POST', 'GET'])
 def uploaded_imgs():
-    imgfile = request.files['image']
-    img_name = werkzeug.utils.secure_filename(imgfile.filename)
-    print(f'Recived an img with file name: {img_name}')
 
-    img_path = os.path.join(savingFolder, img_name)
-    imgfile.save(img_path)
+    img_files_ids = request.files.getlist('images')
+    print(f"____The number of Imgs is {len(img_files_ids)}____")
 
+    all_results = []    
+    for img_file in request.files.getlist('images'):
+        img_name = werkzeug.utils.secure_filename(img_file.filename)
+        print(f'Recived an img with file name: {img_name}')
+        img_path = os.path.join(savingFolder, img_name)
+        img_file.save(img_path)
 
-    predictions = get_preds(img_path)
-    print(predictions)
-    print(type(predictions))
-    result = [
-        {'img_path': img_path, 'preds':predictions},
-    ]
+        predictions = get_preds(img_path)
+        print(predictions)
+        result = {'img_path': img_path, 'preds':predictions}
 
-    return jsonify(result)
+        all_results.append(result)
+
+    print(all_results)
+
+    print("___Deleting files____")
+    delete_imgs()
+    
+    return jsonify(all_results)
+
+def delete_imgs():
+    for imgname in os.listdir(savingFolder):
+        img_path = os.path.join(savingFolder, imgname)
+        os.remove(img_path)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
