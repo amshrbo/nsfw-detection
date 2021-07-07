@@ -12,3 +12,19 @@ A python flask api that given an image will return a score on how much it's suit
   1. I used Pillow for loading rgb and resizing the Imgs (224, 224) as Imgs size.
   1. Then I augmented the data using the `ImageDataGenerator` Provided by keras.
 - For more Detailed Info look at the [data-augmentation](./data_preprocessing/data-augmentation.ipynb) notebook. 
+
+## Installation Instructions
+1. Install python3 
+2. Install pip3 `$ sudo apt install python3-pip`
+3. Install virtualenv `$ python3 -m pip install --user virtualenv`
+4. Append virtualenv path to your `$PATH varibale`
+    - find out where virtualenv installed `$ which virtualenv`
+    - append the output of the above command to `$ export PATH=/the/output/path:$PATH`
+5. Create the virtualenv `$ virtualenv --python=$(which python3) venv`
+    - Make sure you are in the project folder.
+6. Activate virtualenv `$ source venv/bin/activate`
+7. Install requirments `$ pip3 install -r requirments.txt`
+8. Make sure that the version of pillow lib is Pillow==8.2.0
+    - `$ pip freeze | grep Pillow`
+    - As there is some lib conflicts with other pillow versions
+    - To make sure that everything is okay `$ pip install Pillow==8.2.0`
