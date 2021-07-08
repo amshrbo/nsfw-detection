@@ -37,4 +37,4 @@ A python flask api that given an image will return a score on how much it's suit
 1. **Using more robust model** like resnet or vgg instead of mobile net. 
 
 ## Contacts or for more info
-> You can reach out for me in twitter `@amshrbo` or via gmail `amshrbo@gmail.com`
+> You can reach out for me in twitter [`@amshrbo`](https://twitter.com/amshrbo) or via gmail `amshrbo@gmail.com`
