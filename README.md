@@ -28,3 +28,13 @@ A python flask api that given an image will return a score on how much it's suit
     - `$ pip freeze | grep Pillow`
     - As there is some lib conflicts with other pillow versions
     - To make sure that everything is okay `$ pip install Pillow==8.2.0`
+## To Do
+1. Collecting more violence data from this dataset in kaggle [real life violence](https://www.kaggle.com/mohamedmustafa/real-life-violence-situations-dataset)
+    - This is a video dataset, so you can just extract images from it
+1. In the next phase you can drop drugs class as it was very hard to collect images for it and didn't get a good accuracy after all
+    - or you can try more with collecting more data for drugs.
+1. Retraining the model on those new dataset
+1. **Using more robust model** like resnet or vgg instead of mobile net. 
+
+## Contacts or for more info
+> You can reach out for me in twitter `@amshrbo` or via gmail `amshrbo@gmail.com`
