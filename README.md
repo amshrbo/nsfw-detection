@@ -2,6 +2,14 @@
 A python flask API takes an image or a set of images, will return a score on how much it's suitable for work, detecting nudity, violence and drugs.
 - For detecting nudity I used [nudeNet](https://github.com/notAI-tech/NudeNet) from notAI
 - For violence and drugs detection, I hypertuned mobilenet on my own collected dataset:
+> You should know that, This project is **Under development** for more info about the next realse look at the [To Do section](#to-do).
+
+## Tables of contents
+1. [Describing the DataSet](#dataset-for-violence-and-drugs)
+2. [Installation instructions](#installation-instructions)
+3. [To Do](#to-do).
+4. [Contacts](#contacts-or-for-more-info)
+5. [License](#license)
 
 ## DataSet for violence and drugs
 - At first I didn't find any avilable dataset online so I collected I set of Imgs by myself:
@@ -20,14 +28,18 @@ A python flask API takes an image or a set of images, will return a score on how
 4. Append virtualenv path to your `$PATH varibale`
     - find out where virtualenv installed `$ which virtualenv`
     - append the output of the above command to `$ export PATH=/the/output/path:$PATH`
-5. Create the virtualenv `$ virtualenv --python=$(which python3) venv`
-    - Make sure you are in the project folder.
-6. Activate virtualenv `$ source venv/bin/activate`
-7. Install requirments `$ pip3 install -r requirments.txt`
-8. Make sure that the version of pillow lib is Pillow==8.2.0
+    - For more info regarding virtualenv tool you can visit this [github gist](https://gist.github.com/amshrbo/2ca0afb88c428b79ddaf38374226b9e0)
+5. Clone the repo `$ git clone https://github.com/amshrbo/nsfw-detection.git`
+6. Create the virtualenv `$ virtualenv --python=$(which python3) venv`
+    - Make sure you are in the repo folder.
+7. Activate virtualenv `$ source venv/bin/activate`
+8. Install requirments `$ pip3 install -r requirments.txt`
+9. Make sure that the version of pillow lib is Pillow==8.2.0
     - `$ pip freeze | grep Pillow`
     - As there is some lib conflicts with other pillow versions
     - To make sure that everything is okay `$ pip install Pillow==8.2.0`
+10. run the app `python3 app.py`
+
 ## To Do
 1. Collecting more violence data from this dataset in kaggle [real life violence](https://www.kaggle.com/mohamedmustafa/real-life-violence-situations-dataset)
     - This is a video dataset, so you can just extract images from it
