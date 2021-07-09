@@ -1,5 +1,5 @@
 # nsfw-detection
-A python flask api that given an image will return a score on how much it's suitable for work, detecting nudity, violence and drugs.
+A python flask API takes an image or a set of images, will return a score on how much it's suitable for work, detecting nudity, violence and drugs.
 - For detecting nudity I used [nudeNet](https://github.com/notAI-tech/NudeNet) from notAI
 - For violence and drugs detection, I hypertuned mobilenet on my own collected dataset:
 
@@ -38,3 +38,6 @@ A python flask api that given an image will return a score on how much it's suit
 
 ## Contacts or for more info
 > You can reach out for me in twitter [`@amshrbo`](https://twitter.com/amshrbo) or via gmail `amshrbo@gmail.com`
+
+## License
+[GPL-3.0 License](./LICENSE)
