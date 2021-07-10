@@ -22,7 +22,7 @@ A python flask API takes an image or a set of images, will return a score on how
   1. I used Pillow for loading rgb and resizing the Imgs (224, 224) as Imgs size.
   1. Then I augmented the data using the `ImageDataGenerator` Provided by keras.
 - For more Detailed Info look at the [data-augmentation](./data_preprocessing/data-augmentation.ipynb) notebook. 
-> The DataSet is avilabe upon request juest ping me on mail or twitter go to [contacts sectino](#contacts-or-for-more-info).
+> The DataSet is avilable upon request just ping me on mail or twitter go to [contacts section](#contacts-or-for-more-info).
 
 ## Training the Model
 > The Project is **still under development**, the model performs good in the testSet it gets more than 90% accuracy but all the problems comes from the data, so the model will be retrainded on the second release.
@@ -57,6 +57,15 @@ A python flask API takes an image or a set of images, will return a score on how
     - or you can try more with collecting more data for drugs.
 1. Retraining the model on those new dataset
 1. **Using more robust model** like resnet or vgg instead of mobile net. 
+
+## Lessons from this project
+- How to use keras ImageDateGenerator for doing data augmentation you can refer to [data augmentation notebook](./data_preprocessing/data-augmentation.ipynb)
+- `np.shuffle()` shuffles every element in the array and doesn't repest the dimensions, so don't use it to shuffle multi-dims data
+  - Just use the shuffle param in the `train_test_split()` or use the shuffle parm in `keras.model.fit()`
+- How to freeze a set of layers an keep the rest for training.
+- How to add regularization (Specialy l2) to a trained model refer to [regularization section in this notebook](./training_and_loading/nsfw_detection_training.ipynb)
+- If github is unable to open any of the notebooks included in this project just use [nbviewer](https://nbviewer.jupyter.org/)
+- To download batch images from any website use [Image Downloader chrome extension](https://chrome.google.com/webstore/detail/image-downloader/cnpniohnfphhjihaiiggeabnkjhpaldj)
 
 ## Contacts or for more info
 > You can reach out for me in twitter [`@amshrbo`](https://twitter.com/amshrbo) or via gmail `amshrbo@gmail.com`
