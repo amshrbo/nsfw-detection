@@ -1,5 +1,5 @@
 # nsfw-detection
-A python flask API that takes an image or a set of images via a multipart request, will return a precentage score for nudity, violence and drugs.
+Nudity, violence and drugs detection using [nudeNet](https://github.com/notAI-tech/NudeNet) for nudity, for violence and drugs detection hyper-tuned mobilenet model on my own collected dataset, the final results is a python flask API that takes an image or a set of images, will return a score on how much it's suitable for work.
 - For detecting nudity I used [nudeNet](https://github.com/notAI-tech/NudeNet) from notAI
 - For violence and drugs detection, **I hypertuned mobilenet** on my own collected dataset:
 - The nudity score is from 100% on his own, and the other three classes from 100% (violence, drugs, and natural).
