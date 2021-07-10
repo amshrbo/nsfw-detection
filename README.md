@@ -2,14 +2,16 @@
 A python flask API takes an image or a set of images, will return a score on how much it's suitable for work, detecting nudity, violence and drugs.
 - For detecting nudity I used [nudeNet](https://github.com/notAI-tech/NudeNet) from notAI
 - For violence and drugs detection, I hypertuned mobilenet on my own collected dataset:
-> You should know that, This project is **Under development** for more info about the next realse look at the [To Do section](#to-do).
+> You should know that, This project is **Under development** for more info about the next release look at the [To Do section](#to-do).
 
 ## Tables of contents
 1. [Describing the DataSet](#dataset-for-violence-and-drugs)
-2. [Installation instructions](#installation-instructions)
-3. [To Do](#to-do).
-4. [Contacts](#contacts-or-for-more-info)
-5. [License](#license)
+2. [Training the Model](#training-the-model)
+3. [Installation instructions](#installation-instructions)
+4. [To Do](#to-do).
+5. [What did I learn from this project?](#lessons-from-this-project)
+6. [Contacts](#contacts-or-for-more-info)
+7. [License](#license)
 
 ## DataSet for violence and drugs
 - At first I didn't find any avilable dataset online so I collected I set of Imgs by myself:
@@ -20,6 +22,14 @@ A python flask API takes an image or a set of images, will return a score on how
   1. I used Pillow for loading rgb and resizing the Imgs (224, 224) as Imgs size.
   1. Then I augmented the data using the `ImageDataGenerator` Provided by keras.
 - For more Detailed Info look at the [data-augmentation](./data_preprocessing/data-augmentation.ipynb) notebook. 
+> The DataSet is avilabe upon request juest ping me on mail or twitter go to [contacts sectino](#contacts-or-for-more-info).
+
+## Training the Model
+> The Project is **still under development**, the model performs good in the testSet it gets more than 90% accuracy but all the problems comes from the data, so the model will be retrainded on the second release.
+- I used mobilenet (for transefer learning) from keras application layer.
+- I freezed all the model's layers except the last 10 layers for tuning.
+- In most cases with Transefer learning the model become prone to overfitting and that what happened with me:
+  - So to overcome this problem **I just added an L2 regularization for the last ten layers.** you can refer to the model training notebook in the reqularization section. 
 
 ## Installation Instructions
 1. Install python3 
@@ -38,7 +48,7 @@ A python flask API takes an image or a set of images, will return a score on how
     - `$ pip freeze | grep Pillow`
     - As there is some lib conflicts with other pillow versions
     - To make sure that everything is okay `$ pip install Pillow==8.2.0`
-10. run the app `python3 app.py`
+10. run the app `$ python3 app.py`
 
 ## To Do
 1. Collecting more violence data from this dataset in kaggle [real life violence](https://www.kaggle.com/mohamedmustafa/real-life-violence-situations-dataset)
